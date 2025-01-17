@@ -20,7 +20,7 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     Optional<Book> findBy(String title);
 
     @Find
-    @OrderBy("title")
+    @OrderBy(Book_.TITLE)
     List<Book> getAll();
 
     @Find
@@ -29,7 +29,7 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     @Find
     Page<Book> getAllBooksContaining(@Pattern String title, PageRequest page);
 
-    @Query("SELECT m FROM Book m WHERE m.title LIKE :title")
+    @Query("FROM Book WHERE title LIKE :title")
     List<Book> getAllBooksContaining(@Param("title") String title);
 
 }
