@@ -6,6 +6,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import jakarta.data.Limit;
 import jakarta.data.Order;
 import jakarta.data.page.Page;
+import jakarta.data.page.PageRequest;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +40,7 @@ class BookServiceTest {
         bookRepository.save(book2);
         bookRepository.save(book3);
 
-        Page<Book> page = bookRepository.getAllBooksContaining("%book%", new Pagination(1, 2, false));
+        Page<Book> page = bookRepository.getAllBooksContaining("%book%", PageRequest.ofPage(1, 2, false));
 
         assertThat(page.content()).hasSize(2);
     }
